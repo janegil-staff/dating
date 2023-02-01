@@ -26,3 +26,10 @@
 body {
   font-family: "gotham-rounded-medium";
 }
+.error-text {
+  color: rgb(200, 0, 0);
+  font-size: 12px;
+}
+.invalid {
+  border-color: rgb(200, 0, 0);
+}
