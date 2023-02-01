@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Modal from "../UI/modal";
+import Signup from "../users/auth/signup";
 import classes from "./index.module.css";
 
 function StartingPageContent() {
@@ -7,6 +8,7 @@ function StartingPageContent() {
   return (
     <div className={classes["landing-page-background"]}>
       <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+        <Signup />
         <div className={classes.close}></div>
       </Modal>
       <h1 className={classes.title}>Kjærligheten</h1>
