@@ -1,6 +1,6 @@
 import useInput from "@/hooks/use-input";
 import classes from "./signup.module.css";
-const Signup = (props) => {
+const SignUp = (props) => {
   const {
     value: enteredEmail,
     isValid: enteredEmailIsValid,
@@ -8,7 +8,7 @@ const Signup = (props) => {
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
     reset: resetEmailInput,
-  } = useInput(value => value.includes("@"));
+  } = useInput((value) => value.includes("@"));
 
   const {
     value: enteredPassword,
@@ -17,7 +17,7 @@ const Signup = (props) => {
     valueChangeHandler: passwordChangeHandler,
     inputBlurHandler: passwordBlurHandler,
     reset: resetPasswordInput,
-  } = useInput(value => /^[A-Za-z]\w{7,14}$/.test(value.trim()));
+  } = useInput((value) => /^[A-Za-z]\w{7,14}$/.test(value.trim()));
 
   const {
     value: enteredPasswordConfirmation,
@@ -26,23 +26,25 @@ const Signup = (props) => {
     valueChangeHandler: passwordConfirmationChangeHandler,
     inputBlurHandler: passwordConfirmationBlurHandler,
     reset: resetPasswordConfirmationInput,
-  } = useInput(value => value === enteredPassword);
+  } = useInput((value) => value === enteredPassword);
 
   const emailInputClasses = emailInputHasError
     ? "form-control invalid"
     : "form-control";
 
-    const passwordInputClasses = passwordInputHasError
-    ? 'form-control invalid'
-    : 'form-control';
+  const passwordInputClasses = passwordInputHasError
+    ? "form-control invalid"
+    : "form-control";
 
-    const passwordConfirmationInputClasses = passwordConfirmationInputHasError
-    ? 'form-control invalid'
-    : 'form-control';
+  const passwordConfirmationInputClasses = passwordConfirmationInputHasError
+    ? "form-control invalid"
+    : "form-control";
 
   return (
-    <form>
-      <div className="form-group">
+    <form className={classes["signUp-form"]}>
+      <h2>Opprett bruker</h2>
+      <hr />
+      <div className={classes["form-group"]}>
         <label htmlFor="email">E-post</label>
         <input
           className={emailInputClasses}
@@ -59,7 +61,7 @@ const Signup = (props) => {
           <p className={"error-text"}>E-post må inneholde @</p>
         )}
       </div>
-      <div className="form-group">
+      <div className={classes["form-group"]}>
         <label htmlFor="password">Passord</label>
         <input
           className={passwordInputClasses}
@@ -73,10 +75,12 @@ const Signup = (props) => {
           placeholder="Velg et pasord"
         />
         {passwordInputHasError && (
-          <p className={"error-text"}>Passord må inneholed mellom 8-16 tegn, minst en bokstav</p>
+          <p className={"error-text"}>
+            Passord må inneholed mellom 8-16 tegn, minst en bokstav
+          </p>
         )}
       </div>
-      <div className="form-group">
+      <div className={classes["form-group"]}>
         <label htmlFor="passwordConfirmation">Gjenta passord</label>
         <input
           className={passwordConfirmationInputClasses}
@@ -93,8 +97,13 @@ const Signup = (props) => {
           <p className={"error-text"}>Må være lik dit valgte pasord</p>
         )}
       </div>
+
+      <div className={classes["form-buttons"]}>
+        <button className={classes["btn-cancel"]}>Avbryt</button>
+        <button className={classes["btn-create"]}>Opprett</button>
+      </div>
     </form>
   );
 };
 
-export default Signup;
+export default SignUp;

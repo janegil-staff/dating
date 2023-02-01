@@ -1,0 +1,38 @@
+.signUp-form {
+  text-align: left;
+  width: 100%;
+  color: rgb(138, 138, 138);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+.form-group label {
+  line-height: 1.5;
+}
+.form-group input {
+  padding: 10px;
+}
+.form-buttons {
+    margin-top: 50px;
+}
+.btn-cancel,
+.btn-create {
+  width: 50%;
+  background-color: transparent;
+  color: rgb(138, 138, 138);
+  border: 1px solid rgb(138, 138, 138);
+  padding: 10px;
+  font-weight: bold;
+}
+.btn-cancel {
+  float: left;
+  background-color: transparent;
+}
+.btn-create {
+  float: right;
+  background-color: rgb(11, 83, 184);
+  color: #fff;
+}
