@@ -8,13 +8,23 @@ const SignIn = (props) => {
   const [error, setError] = useState(null);
 
   const {
+    value: enteredName,
+    isValid: enteredNamesValid,
+    hasError: nameInputHasError,
+    valueChangeHandler: nameChangeHandler,
+    inputBlurHandler: nameBlurHandler,
+    reset: resetNameInput,
+  } = useInput(value => value.trim() !== '');
+
+
+  const {
     value: enteredEmail,
     isValid: enteredEmailIsValid,
     hasError: emailInputHasError,
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
     reset: resetEmailInput,
-  } = useInput((value) => value.includes("@"));
+  } = useInput(value => value.includes("@"));
 
   const {
     value: enteredPassword,
@@ -23,7 +33,7 @@ const SignIn = (props) => {
     valueChangeHandler: passwordChangeHandler,
     inputBlurHandler: passwordBlurHandler,
     reset: resetPasswordInput,
-  } = useInput((value) => /^[A-Za-z]\w{7,14}$/.test(value.trim()));
+  } = useInput(value => /^[A-Za-z]\w{7,14}$/.test(value.trim()));
 
   const emailInputClasses = emailInputHasError
     ? "form-control invalid"
@@ -32,6 +42,7 @@ const SignIn = (props) => {
   const passwordInputClasses = passwordInputHasError
     ? "form-control invalid"
     : "form-control";
+
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -47,20 +58,13 @@ const SignIn = (props) => {
     //Redirect to another page
   };
 
-  const googleHandler = async event => {
-    const result = await signIn('google');
-    console.log(result);
- 
-  }
-  const facebookHandler = async event => {
-    const result = await signIn('facebook');
-    console.log(result);
-  }
+  
   return (
     <form className={classes["signUp-form"]} onSubmit={submitHandler}>
       <h2>Logg inn</h2>
       <hr />
       {error && <p className="error-text">{error}</p>}
+
       <div className={classes["form-group"]}>
         <label htmlFor="email">E-post</label>
         <input

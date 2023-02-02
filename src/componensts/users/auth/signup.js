@@ -1,4 +1,5 @@
 import useInput from "@/hooks/use-input";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import classes from "./signup.module.css";
 
@@ -24,6 +25,15 @@ const SignUp = (props) => {
   const { setIsOpen } = props;
 
   const [error, setError] = useState(null);
+
+  const {
+    value: enteredName,
+    isValid: enteredNamesValid,
+    hasError: nameInputHasError,
+    valueChangeHandler: nameChangeHandler,
+    inputBlurHandler: nameBlurHandler,
+    reset: resetNameInput,
+  } = useInput((value) => value.trim() !== "");
 
   const {
     value: enteredEmail,
@@ -52,6 +62,10 @@ const SignUp = (props) => {
     reset: resetPasswordConfirmationInput,
   } = useInput((value) => value === enteredPassword);
 
+  const namenputClasses = nameInputHasError
+    ? "form-control invalid"
+    : "form-control";
+
   const emailInputClasses = emailInputHasError
     ? "form-control invalid"
     : "form-control";
@@ -64,8 +78,10 @@ const SignUp = (props) => {
     ? "form-control invalid"
     : "form-control";
 
-  const submitHandler = async event => {
+  const router = useRouter();
+  const submitHandler = async (event) => {
     event.preventDefault();
+    
     try {
       const result = await createUser(enteredEmail, enteredPassword);
       router.replace("/");
@@ -73,14 +89,29 @@ const SignUp = (props) => {
       setError(error.message);
     }
   };
-  
+
   return (
     <form className={classes["signUp-form"]} onSubmit={submitHandler}>
       <h2>Opprett bruker</h2>
       <hr />
-      {error && (
-          <p className={"error-text"}>{error}</p>
+      {error && <p className={"error-text"}>{error}</p>}
+      <div className={classes["form-group"]}>
+        <label htmlFor="name">Brukernavn</label>
+        <input
+          className={namenputClasses}
+          type="text"
+          id="name"
+          onChange={nameChangeHandler}
+          onBlur={nameBlurHandler}
+          value={enteredName}
+          required
+          aria-describedby="nameHelp"
+          placeholder="Ola Normann"
+        />
+        {nameInputHasError && (
+          <p className={"error-text"}>E-post må inneholde @</p>
         )}
+      </div>
       <div className={classes["form-group"]}>
         <label htmlFor="email">E-post</label>
         <input
@@ -92,7 +123,7 @@ const SignUp = (props) => {
           value={enteredEmail}
           required
           aria-describedby="emailHelp"
-          placeholder="Enter email"
+          placeholder="ola@normann.no"
         />
         {emailInputHasError && (
           <p className={"error-text"}>E-post må inneholde @</p>

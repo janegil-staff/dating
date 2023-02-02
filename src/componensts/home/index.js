@@ -3,14 +3,14 @@ import Modal from "../UI/modal";
 import SignIn from "../users/auth/signIn";
 import SignUp from "../users/auth/signUp";
 import classes from "./index.module.css";
-
+import { useSession, signOut } from "next-auth/react";
 function StartingPageContent() {
   const [isSignUpOpen, setSignUpIsOpen] = useState(false);
   const [isLogInOpen, setLogInIsOpen] = useState(false);
+  const { data: session} = useSession();
 
   return (
     <div className={classes["landing-page-background"]}>
-
       <Modal isOpen={isSignUpOpen} setIsOpen={setSignUpIsOpen}>
         <SignUp setIsOpen={setLogInIsOpen} />
         <div className={classes.close}></div>
