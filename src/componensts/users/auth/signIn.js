@@ -1,7 +1,12 @@
 import useInput from "@/hooks/use-input";
 import classes from "./signup.module.css";
+import { signIn } from "next-auth/react";
+import { useState } from "react";
+
 const SignIn = (props) => {
   const { setIsOpen } = props;
+  const [error, setError] = useState(null);
+
   const {
     value: enteredEmail,
     isValid: enteredEmailIsValid,
@@ -28,15 +33,25 @@ const SignIn = (props) => {
     ? "form-control invalid"
     : "form-control";
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
-    console.log("Signin form submitted");
+    setError(null);
+    const result = await signIn("credentials", {
+      redirect: false,
+      email: enteredEmail,
+      password: enteredPassword,
+    });
+
+    if(result.error) setError(result.error);
+
+    //Redirect to another page
   };
 
   return (
     <form className={classes["signUp-form"]} onSubmit={submitHandler}>
       <h2>Logg inn</h2>
       <hr />
+      {error && <p className="error-text">{error}</p>}
       <div className={classes["form-group"]}>
         <label htmlFor="email">E-post</label>
         <input
