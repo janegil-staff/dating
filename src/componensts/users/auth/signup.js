@@ -73,6 +73,7 @@ const SignUp = (props) => {
       setError(error.message);
     }
   };
+  
   return (
     <form className={classes["signUp-form"]} onSubmit={submitHandler}>
       <h2>Opprett bruker</h2>

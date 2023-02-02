@@ -1,7 +1,12 @@
+import { signOut } from "next-auth/react";
+
 const Layout = props => {
 
   return (
-    <main>{props.children}</main>
+    <>
+      <main>{props.children}</main>
+    </>
+  
   );
 }
 

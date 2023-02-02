@@ -47,6 +47,15 @@ const SignIn = (props) => {
     //Redirect to another page
   };
 
+  const googleHandler = async event => {
+    const result = await signIn('google');
+    console.log(result);
+ 
+  }
+  const facebookHandler = async event => {
+    const result = await signIn('facebook');
+    console.log(result);
+  }
   return (
     <form className={classes["signUp-form"]} onSubmit={submitHandler}>
       <h2>Logg inn</h2>
