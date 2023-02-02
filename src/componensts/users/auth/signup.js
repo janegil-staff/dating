@@ -1,6 +1,7 @@
 import useInput from "@/hooks/use-input";
 import classes from "./signup.module.css";
 const SignUp = (props) => {
+  const { setIsOpen } = props;
   const {
     value: enteredEmail,
     isValid: enteredEmailIsValid,
@@ -40,8 +41,12 @@ const SignUp = (props) => {
     ? "form-control invalid"
     : "form-control";
 
+    const submitHandler = event => {
+        event.preventDefault();
+        console.log('Form submitted');
+    }
   return (
-    <form className={classes["signUp-form"]}>
+    <form className={classes["signUp-form"]} onSubmit={submitHandler}>
       <h2>Opprett bruker</h2>
       <hr />
       <div className={classes["form-group"]}>
@@ -99,8 +104,11 @@ const SignUp = (props) => {
       </div>
 
       <div className={classes["form-buttons"]}>
-        <button className={classes["btn-cancel"]}>Avbryt</button>
-        <button className={classes["btn-create"]}>Opprett</button>
+        <button 
+        className={classes['btn-cancel']} 
+        onClick={() => setIsOpen(false)}> 
+            Avbryt</button>
+        <button type="submit" className={classes["btn-ok"]}>Opprett</button>
       </div>
     </form>
   );

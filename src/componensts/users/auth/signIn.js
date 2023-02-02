@@ -1,20 +1,93 @@
-import classes from './signup.module.css';
+import useInput from "@/hooks/use-input";
+import classes from "./signup.module.css";
 const SignIn = (props) => {
+  const { setIsOpen } = props;
+  const {
+    value: enteredEmail,
+    isValid: enteredEmailIsValid,
+    hasError: emailInputHasError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+    reset: resetEmailInput,
+  } = useInput((value) => value.includes("@"));
+
+  const {
+    value: enteredPassword,
+    isValid: enteredPasswordIsValid,
+    hasError: passwordInputHasError,
+    valueChangeHandler: passwordChangeHandler,
+    inputBlurHandler: passwordBlurHandler,
+    reset: resetPasswordInput,
+  } = useInput((value) => /^[A-Za-z]\w{7,14}$/.test(value.trim()));
+
+  const emailInputClasses = emailInputHasError
+    ? "form-control invalid"
+    : "form-control";
+
+  const passwordInputClasses = passwordInputHasError
+    ? "form-control invalid"
+    : "form-control";
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    console.log("Signin form submitted");
+  };
+
   return (
-    <form action="/action_page.php">
-    <fieldset className={classes.fieldset}>
-      <legend>Personalia:</legend>
-      <label for="fname">First name:</label>
-      <input type="text" id="fname" name="fname" /><br /><br />
-      <label for="lname">Last name:</label>
-      <input type="text" id="lname" name="lname" /><br /> <br />
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" /><br /><br /> 
-      <label for="birthday">Birthday:</label>
-      <input type="date" id="birthday" name="birthday" /><br /><br />
-      <input type="submit" value="Submit" />
-    </fieldset>
-  </form>
+    <form className={classes["signUp-form"]} onSubmit={submitHandler}>
+      <h2>Logg inn</h2>
+      <hr />
+      <div className={classes["form-group"]}>
+        <label htmlFor="email">E-post</label>
+        <input
+          className={emailInputClasses}
+          type="email"
+          id="email"
+          onChange={emailChangeHandler}
+          onBlur={emailBlurHandler}
+          value={enteredEmail}
+          required
+          aria-describedby="emailHelp"
+          placeholder="Enter email"
+        />
+        {emailInputHasError && (
+          <p className={"error-text"}>E-post må inneholde @</p>
+        )}
+      </div>
+      <div className={classes["form-group"]}>
+        <label htmlFor="password">Passord</label>
+        <input
+          className={passwordInputClasses}
+          type="password"
+          id="password"
+          onChange={passwordChangeHandler}
+          onBlur={passwordBlurHandler}
+          value={enteredPassword}
+          required
+          aria-describedby="paswordHelp"
+          placeholder="Velg et pasord"
+        />
+        {passwordInputHasError && (
+          <p className={"error-text"}>
+            Passord må inneholed mellom 8-16 tegn, minst en bokstav
+          </p>
+        )}
+      </div>
+
+      <div className={classes["form-buttons"]}>
+        <button
+          type="button"
+          className={classes["btn-cancel"]}
+          onClick={() => setIsOpen(false)}
+        >
+          Avbryt
+        </button>
+        <button type="submit" className={classes["btn-ok"]}>
+          Logg inn
+        </button>
+      </div>
+    </form>
   );
 };
+
 export default SignIn;

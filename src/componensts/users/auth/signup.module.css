@@ -19,19 +19,20 @@
     margin-top: 50px;
 }
 .btn-cancel,
-.btn-create {
+.btn-ok {
   width: 50%;
   background-color: transparent;
   color: rgb(138, 138, 138);
   border: 1px solid rgb(138, 138, 138);
   padding: 10px;
   font-weight: bold;
+  cursor: pointer;
 }
 .btn-cancel {
   float: left;
   background-color: transparent;
 }
-.btn-create {
+.btn-ok {
   float: right;
   background-color: rgb(11, 83, 184);
   color: #fff;
