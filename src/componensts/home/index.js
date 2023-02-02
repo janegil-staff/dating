@@ -7,6 +7,7 @@ import classes from "./index.module.css";
 function StartingPageContent() {
   const [isSignUpOpen, setSignUpIsOpen] = useState(false);
   const [isLogInOpen, setLogInIsOpen] = useState(false);
+
   return (
     <div className={classes["landing-page-background"]}>
       <Modal isOpen={isSignUpOpen} setIsOpen={setSignUpIsOpen}>
