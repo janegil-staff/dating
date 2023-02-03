@@ -2,6 +2,7 @@ import useInput from "@/hooks/use-input";
 import classes from "./signup.module.css";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
+import { signInUser } from "@/helpers/user-helper";
 
 const SignIn = (props) => {
   const { setIsOpen } = props;
@@ -47,14 +48,18 @@ const SignIn = (props) => {
   const submitHandler = async (event) => {
     event.preventDefault();
     setError(null);
-    const result = await signIn("credentials", {
+    let options = {
       redirect: false,
       email: enteredEmail,
-      password: enteredPassword,
-    });
-
-    if(result.error) setError(result.error);
-
+      password: enteredPassword
+    }
+    const result = await signInUser({
+      type: 'credentials', 
+      options, 
+      setError});
+    
+    console.log(result);
+    
     //Redirect to another page
   };
 

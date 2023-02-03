@@ -1,4 +1,5 @@
-import { createUser } from "@/helpers/create-user";
+
+import { createUser, signInUser } from "@/helpers/user-helper";
 import useInput from "@/hooks/use-input";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -7,6 +8,7 @@ import classes from "./signup.module.css";
 const SignUp = (props) => {
   const { setIsOpen } = props;
   const [error, setError] = useState(null);
+  const router = useRouter();
 
   const {
     value: enteredName,
@@ -60,15 +62,29 @@ const SignUp = (props) => {
     ? "form-control invalid"
     : "form-control";
 
-  const router = useRouter();
   const submitHandler = async (event) => {
     event.preventDefault();
 
     try {
-      const result = await createUser({
+      await createUser({
+        name: enteredName,
         email: enteredEmail, 
         password: enteredPassword, 
-        setError: setError});
+        setError});
+
+        // Signing in new user
+
+        let options = {
+          redirect: false,
+          email: enteredEmail,
+          password: enteredPassword
+        }
+        await signInUser({
+          type: 'credentials',
+          options,
+          setError
+        });
+        router.replace('/');
     } catch (error) {
       setError(error.message);
     }

@@ -1,3 +1,4 @@
+import { signOut } from "next-auth/react";
 import { useState } from "react";
 import Modal from "../UI/modal";
 import SignIn from "../users/auth/signIn";
@@ -29,7 +30,6 @@ const StartingPageContent = () => {
         <button 
         onClick={() => setLogInIsOpen(true)} 
         className={classes["btn-login"]}>Logg inn</button>
-
       </div>
     </div>
   );
