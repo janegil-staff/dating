@@ -92,7 +92,6 @@ const SignUp = (props) => {
  
   const cancelHandler = event => {
     setIsOpen(false);
-    console.log('FOOBAR');
   }
   return (
     <form className={classes["signUp-form"]} onSubmit={submitHandler}>

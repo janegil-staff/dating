@@ -7,9 +7,17 @@ const ProfilePage = props => {
 
 export const getServerSideProps = async context => {
   const session = await getSession({req: context.req});
-    console.log(session);
-  const client = await connectToDatabase();
 
+  if(!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
+  const client = await connectToDatabase();
   const db = client.db();
 
   const currentUser = await db.collection("users").findOne({
@@ -23,15 +31,6 @@ export const getServerSideProps = async context => {
   delete user._id;
 
   client.close();
-  if(!session) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false
-      }
-    }
-  }
-
   return {
     props: { session, user }
   }

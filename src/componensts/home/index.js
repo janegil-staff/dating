@@ -1,13 +1,16 @@
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import Modal from "../UI/modal";
 import SignIn from "../users/auth/signIn";
 import SignUp from "../users/auth/signUp";
 import classes from "./index.module.css";
 
-const StartingPageContent = () => {
+const StartingPageContent = props => {
   const [isSignUpOpen, setSignUpIsOpen] = useState(false);
   const [isLogInOpen, setLogInIsOpen] = useState(false);
+
+  const {session} = props;
 
   return (
     <div className={classes["landing-page-background"]}>
