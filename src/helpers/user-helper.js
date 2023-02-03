@@ -1,4 +1,5 @@
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export const createUser = async (props) => {
   const { name, email, password, setError } = props;
@@ -21,9 +22,10 @@ export const createUser = async (props) => {
 
 export const signInUser = async props => {
   const { type, options, setError } = props;
+  const router = useRouter();
   const result = await signIn(type, options);
 
   if(result.error) setError(result.error || 'Noe gikk galt!');
-
+  router.replace('/profile');
   return result;
 };

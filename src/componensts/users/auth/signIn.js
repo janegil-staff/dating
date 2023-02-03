@@ -1,23 +1,12 @@
 import useInput from "@/hooks/use-input";
 import classes from "./signup.module.css";
-import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { signInUser } from "@/helpers/user-helper";
 
 const SignIn = (props) => {
   const { setIsOpen } = props;
   const [error, setError] = useState(null);
-
-  const {
-    value: enteredName,
-    isValid: enteredNamesValid,
-    hasError: nameInputHasError,
-    valueChangeHandler: nameChangeHandler,
-    inputBlurHandler: nameBlurHandler,
-    reset: resetNameInput,
-  } = useInput(value => value.trim() !== '');
-
-
+  
   const {
     value: enteredEmail,
     isValid: enteredEmailIsValid,

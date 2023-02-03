@@ -8,7 +8,7 @@ const handler = async (req, res) => {
 
   const data = req.body;
 
-  const { email, password } = data;
+  const { sex, birthdate, name, email, password } = data;
  
   if (!email || !email.includes("@" || !password || password.length < 7)) {
     res.status(422).json({
@@ -34,10 +34,17 @@ const handler = async (req, res) => {
 
   const user = await db.collection('users').insertOne({
     email: email,
-    password: hashedPassword
+    password: hashedPassword,
+    profile: {
+      name: name,
+      about: '',
+      sex: false,
+      birthDate: new Date().toString(),
+      images: [],
+      liked: [],
+      likedMe:[]
+    }
   });
-
-
   res.status(201).json({ message: "Bruker opprettet!!" });
 
   client.close();

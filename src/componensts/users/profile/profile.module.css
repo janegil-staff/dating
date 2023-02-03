@@ -1,0 +1,37 @@
+.profileHeader {
+  padding: 50px 0;
+  text-align:center;
+}
+.profileHeading {
+   margin: 20px;
+}
+.profileImageContainer {
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 2px solid #000;
+}
+.profileImageContainer img {
+  width: 100%;
+  height: auto;
+}
+
+.profileSection {
+  position: relative;
+  color: rgb(224, 224, 224);
+  height: 100vh;
+}
+
+.profileNavigation {
+    padding-top:30px;
+}
+.profile-icon {
+    color: rgb(224, 224, 224);
+
+}
+
+.profile-icon:hover {
+    color: #fff;
+}

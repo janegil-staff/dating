@@ -1,10 +1,10 @@
-import { signOut } from "next-auth/react";
+import classes from './layout.module.css';
 
 const Layout = props => {
 
   return (
     <>
-      <main>{props.children}</main>
+      <main className={classes.background}>{props.children}</main>
     </>
   
   );
