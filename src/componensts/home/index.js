@@ -1,9 +1,7 @@
-import { signOut } from "next-auth/react";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import Modal from "../UI/modal";
 import SignIn from "../users/auth/signIn";
-import SignUp from "../users/auth/signUp";
+import SignUp from "../users/auth/signup";
 import classes from "./index.module.css";
 
 const StartingPageContent = props => {

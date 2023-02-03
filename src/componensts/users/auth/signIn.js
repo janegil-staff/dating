@@ -1,5 +1,5 @@
 import useInput from "@/hooks/use-input";
-import classes from "./signup.module.css";
+import classes from "./signup_old.module.css";
 import { useState } from "react";
 import { signInUser } from "@/helpers/user-helper";
 import { useRouter } from "next/router";

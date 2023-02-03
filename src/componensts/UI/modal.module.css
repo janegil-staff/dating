@@ -8,16 +8,19 @@
 }
 
 .modal-container {
-  width: 75%;
-  height: 75%;
+ 
   background-color: whitesmoke;
-  border-radius: 20px;
+
   box-shadow: 5px 5px 10px #1e1e1e;
-  display: flex;
-  flex-direction: column;
-  padding: 3rem;
+  display: inline-block;
+
   align-items: center;
   position: relative;
+}
+@media (min-width: 600px) {
+  .modal-container {
+    margin: 3rem;
+  }
 }
 
 .close {
