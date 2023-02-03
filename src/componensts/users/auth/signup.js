@@ -1,29 +1,11 @@
+import { createUser } from "@/helpers/create-user";
 import useInput from "@/hooks/use-input";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import classes from "./signup.module.css";
 
-const createUser = async (email, password) => {
-  const response = await fetch("/api/auth/signup", {
-    method: "POST",
-    body: JSON.stringify({ email, password }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Something went wrong!");
-  }
-
-  return data;
-};
-
 const SignUp = (props) => {
   const { setIsOpen } = props;
-
   const [error, setError] = useState(null);
 
   const {
@@ -81,15 +63,21 @@ const SignUp = (props) => {
   const router = useRouter();
   const submitHandler = async (event) => {
     event.preventDefault();
-    
+
     try {
-      const result = await createUser(enteredEmail, enteredPassword);
-      router.replace("/");
+      const result = await createUser({
+        email: enteredEmail, 
+        password: enteredPassword, 
+        setError: setError});
     } catch (error) {
       setError(error.message);
     }
   };
-
+ 
+  const cancelHandler = event => {
+    setIsOpen(false);
+    console.log('FOOBAR');
+  }
   return (
     <form className={classes["signUp-form"]} onSubmit={submitHandler}>
       <h2>Opprett bruker</h2>
@@ -109,7 +97,7 @@ const SignUp = (props) => {
           placeholder="Ola Normann"
         />
         {nameInputHasError && (
-          <p className={"error-text"}>E-post må inneholde @</p>
+          <p className={"error-text"}>Navn feltet må ha innhold</p>
         )}
       </div>
       <div className={classes["form-group"]}>
@@ -123,7 +111,7 @@ const SignUp = (props) => {
           value={enteredEmail}
           required
           aria-describedby="emailHelp"
-          placeholder="ola@normann.no"
+          placeholder="ola@normann.com"
         />
         {emailInputHasError && (
           <p className={"error-text"}>E-post må inneholde @</p>
@@ -134,7 +122,7 @@ const SignUp = (props) => {
         <input
           className={passwordInputClasses}
           type="password"
-          id="password"
+          id="confirmPassword"
           onChange={passwordChangeHandler}
           onBlur={passwordBlurHandler}
           value={enteredPassword}
@@ -168,16 +156,19 @@ const SignUp = (props) => {
 
       <div className={classes["form-buttons"]}>
         <button
+          type="button"
           className={classes["btn-cancel"]}
-          onClick={() => setIsOpen(false)}
+          onClick={cancelHandler}
         >
           Avbryt
         </button>
         <button type="submit" className={classes["btn-ok"]}>
           Opprett
         </button>
-      </div>
+     </div>
+     
     </form>
+    
   );
 };
 
