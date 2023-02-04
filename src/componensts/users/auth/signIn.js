@@ -1,5 +1,5 @@
 import useInput from "@/hooks/use-input";
-import classes from "./signup_old.module.css";
+import classes from "./signup.module.css";
 import { useState } from "react";
 import { signInUser } from "@/helpers/user-helper";
 import { useRouter } from "next/router";
@@ -48,67 +48,76 @@ const SignIn = (props) => {
       setError,
     });
 
-    if(!result.error) {
+    if (!result.error) {
       router.replace("/profile");
     }
   };
 
   return (
-    <form className={classes["signUp-form"]} onSubmit={submitHandler}>
-      <h2>Logg inn</h2>
-      <hr />
-      {error && <p className="error-text">{error}</p>}
+    <div className={classes.contain}>
+      <div className={classes.wrapper}>
+        <div className={classes.contacts}>
+          <h3>Kjærligheten</h3>
 
-      <div className={classes["form-group"]}>
-        <label htmlFor="email">E-post</label>
-        <input
-          className={emailInputClasses}
-          type="email"
-          id="email"
-          onChange={emailChangeHandler}
-          onBlur={emailBlurHandler}
-          value={enteredEmail}
-          required
-          aria-describedby="emailHelp"
-          placeholder="Enter email"
-        />
-        {emailInputHasError && (
-          <p className={"error-text"}>E-post må inneholde @</p>
-        )}
-      </div>
-      <div className={classes["form-group"]}>
-        <label htmlFor="password">Passord</label>
-        <input
-          className={passwordInputClasses}
-          type="password"
-          id="password"
-          onChange={passwordChangeHandler}
-          onBlur={passwordBlurHandler}
-          value={enteredPassword}
-          required
-          aria-describedby="paswordHelp"
-          placeholder="Velg et pasord"
-        />
-        {passwordInputHasError && (
-          <p className={"error-text"}>
-            Passord må inneholed mellom 8-16 tegn, minst en bokstav
-          </p>
-        )}
-      </div>
+          <ul className={classes.info}>
+            <li>Helt gratis</li>
+            <li>Ingen reklame</li>
+            <li>Enkel å bruke</li>
+          </ul>
+        </div>
 
-      <div className={classes["form-buttons"]}>
-        <button
-          type="button"
-          className={classes["btn-cancel"]}
-          onClick={() => setIsOpen(false)}
-        >
-          Avbryt
-        </button>
-        <button type="submit" className={classes["btn-ok"]}>
-          Logg inn
-        </button>
+        <div className={classes.form}>
+          <h3>Logg inn</h3>
+          {error && <p className="error-text">{error}</p>}
+          <form className={classes["signUp-form"]} onSubmit={submitHandler}>
+          
+            <p>
+              <div className={classes["form-group"]}>
+                <label htmlFor="email">E-post</label>
+                <input
+                  className={emailInputClasses}
+                  type="email"
+                  id="email"
+                  onChange={emailChangeHandler}
+                  onBlur={emailBlurHandler}
+                  value={enteredEmail}
+                  required
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                />
+                {emailInputHasError && (
+                  <p className={"error-text"}>E-post må inneholde @</p>
+                )}
+              </div>
+            </p>
+            <p>
+              <div className={classes["form-group"]}>
+                <label htmlFor="password">Passord</label>
+                <input
+                  className={passwordInputClasses}
+                  type="password"
+                  id="password"
+                  onChange={passwordChangeHandler}
+                  onBlur={passwordBlurHandler}
+                  value={enteredPassword}
+                  required
+                  aria-describedby="paswordHelp"
+                  placeholder="Velg et pasord"
+                />
+                {passwordInputHasError && (
+                  <p className={"error-text"}>
+                    Passord må inneholed mellom 8-16 tegn, minst en bokstav
+                  </p>
+                )}
+              </div>
+            </p>
+            <p className={classes["full-width"]}>
+              <button>Send</button>
+            </p>
+          </form>
+        </div>
       </div>
-    </form>
+    </div>
   );
 };
 

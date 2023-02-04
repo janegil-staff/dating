@@ -97,6 +97,7 @@
     background: lightgrey;
     width: 100%;
     border: 0;
+    cursor: pointer;
   }
   .contain button:hover, .contain button:focus {
     background: gold;

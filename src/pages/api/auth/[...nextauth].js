@@ -17,10 +17,6 @@ export default NextAuth({
     FacebookProvider({
       clientId: process.env.FACEBOOK_ID,
       clientSecret: process.env.FACEBOOK_SECRET,
-      callbacks: () => {
-          console.log('FOOOBAR');
-        }
-      
     }),
     CredentialsProvider({
       async authorize(credentials) {

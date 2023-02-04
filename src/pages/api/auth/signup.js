@@ -9,7 +9,7 @@ const handler = async (req, res) => {
   const data = req.body;
 
   const { sex, birthdate, name, email, password } = data;
- 
+
   if (!email || !email.includes("@" || !password || password.length < 7)) {
     res.status(422).json({
       message: "Passord må inneholed mellom 8-16 tegn og inneholde minst en bokstav.",
@@ -38,8 +38,8 @@ const handler = async (req, res) => {
     profile: {
       name: name,
       about: '',
-      sex: false,
-      birthDate: new Date().toString(),
+      sex: sex,
+      birthDate: birthdate,
       images: [],
       liked: [],
       likedMe:[]
@@ -48,7 +48,6 @@ const handler = async (req, res) => {
   res.status(201).json({ message: "Bruker opprettet!!" });
 
   client.close();
-
 };
 
 export default handler;

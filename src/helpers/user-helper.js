@@ -1,10 +1,10 @@
 import { signIn } from "next-auth/react";
 
 export const createUser = async (props) => {
-  const { name, email, password, setError } = props;
+  const { sex, birthdate, name, email, password, setError } = props;
   const response = await fetch("/api/auth/signup", {
     method: "POST",
-    body: JSON.stringify({ name, email, password }),
+    body: JSON.stringify({ sex, birthdate, name, email, password }),
     headers: {
       "Content-Type": "application/json",
     },

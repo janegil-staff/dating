@@ -3,12 +3,13 @@ import classes from "./signup.module.css";
 import DatePicker from "react-datepicker";
 import { useRouter } from "next/router";
 import useInput from "@/hooks/use-input";
+import { createUser, signInUser } from "@/helpers/user-helper";
 const SignUp = (props) => {
   const [startDate, setStartDate] = useState(new Date());
   const { setIsOpen } = props;
   const [error, setError] = useState(null);
   const router = useRouter();
-
+  const [sex, setSex] = useState('male');
   const {
     value: enteredName,
     isValid: enteredNamesValid,
@@ -60,6 +61,40 @@ const SignUp = (props) => {
   const passwordConfirmationInputClasses = passwordConfirmationInputHasError
     ? "form-control invalid"
     : "form-control";
+  
+    const submitHandler = async (event) => {
+      event.preventDefault();
+  
+      try {
+        await createUser({
+          name: enteredName,
+          email: enteredEmail, 
+          password: enteredPassword, 
+          sex,
+          birthdate: startDate,
+          setError});
+  
+          // Signing in new user
+  
+          let options = {
+            redirect: false,
+            email: enteredEmail,
+            password: enteredPassword
+          }
+          await signInUser({
+            type: 'credentials',
+            options,
+            setError
+          });
+          router.replace('/profile');
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+    const onSexChange = event => {
+      setSex(event.target.value);
+      console.log(sex);
+    }
   return (
     <>
       <div className={classes.contain}>
@@ -76,7 +111,7 @@ const SignUp = (props) => {
 
           <div className={classes.form}>
             <h3>Registrer deg</h3>
-            <form action="">
+            <form onSubmit={submitHandler}>
               <p>
                 {error && <p className={"error-text"}>{error}</p>}
                 <div className={classes["form-group"]}>
@@ -133,7 +168,7 @@ const SignUp = (props) => {
                       name="sex"
                       id="radio-1"
                       value="male"
-                      checked="checked"
+                      onChange={onSexChange}
                     />
                   </li>
                   <li>
@@ -143,6 +178,7 @@ const SignUp = (props) => {
                       name="sex"
                       id="radio-2"
                       value="female"
+                      onChange={onSexChange}
                     />
                   </li>
                 </ul>
