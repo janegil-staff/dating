@@ -3,7 +3,8 @@ import { useCallback, useRef, useState } from "react";
 import Cropper from "react-easy-crop";
 import CropImage from "./image/crop-image";
 import classes from "./image/crop-image.module.css";
-const EditProfile = (props) => {
+const EditProfile = props => {
+    const { user } = props;
   const [src, setSrc] = useState(null);
   const [error, setError] = useState(null);
   const handleFileChange = (event) => {
@@ -22,7 +23,7 @@ const EditProfile = (props) => {
     <>
       <input type="file" onChange={handleFileChange} />
       {error && <p className="error-text">{error}</p>}
-      <CropImage src={src} setSrc={setSrc} />
+      <CropImage user={user} src={src} setSrc={setSrc} />
     </>
   );
 };

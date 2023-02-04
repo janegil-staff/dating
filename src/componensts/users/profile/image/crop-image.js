@@ -3,7 +3,7 @@ import { useCallback, useRef, useState } from "react";
 import Cropper from "react-easy-crop";
 import classes from "./crop-image.module.css";
 const CropImage = props => {
-  const { src, setSrc } = props;
+  const { user, src, setSrc } = props;
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
 
@@ -19,7 +19,18 @@ const CropImage = props => {
 
   const cropImageHandler = async () => {
     const base64Image = await getCroppedImage(src, pixelCrop);
-    console.log(base64Image);
+  
+
+    const response = await fetch("/api/profile/image-upload", {
+        method: "POST",
+        body: JSON.stringify({ user, base64Image }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    
+      const data = await response.json();
+      console.log(data);
   };
 
   return (
