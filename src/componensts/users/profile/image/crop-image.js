@@ -1,5 +1,6 @@
 import { getCroppedImage } from "@/helpers/crop-image-helper";
-import { useCallback, useRef, useState } from "react";
+import { fetchUploadImage, updateUserImages } from "@/helpers/fetch-helper";
+import { useCallback, useState } from "react";
 import Cropper from "react-easy-crop";
 import classes from "./crop-image.module.css";
 const CropImage = (props) => {
@@ -19,17 +20,9 @@ const CropImage = (props) => {
 
   const cropImageHandler = async () => {
     const base64Image = await getCroppedImage(src, pixelCrop);
-
-    const response = await fetch("/api/profile/image-upload", {
-      method: "POST",
-      body: JSON.stringify({ user, base64Image }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const data = await response.json();
-    console.log(data.message);
+    const imageUrl = await fetchUploadImage(user, base64Image);
+    await updateUserImages(user, imageUrl, 'PUSH');
+    cancelCrop();
   };
 
   return (
