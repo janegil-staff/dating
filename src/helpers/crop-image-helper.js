@@ -15,10 +15,10 @@ export const getCroppedImage = async (src, pixelCrop) => {
 
     const scaleX = image.naturalWidth / image.width;
     const scaleY = image.naturalHeight / image.height;
-    canvas.width = pixelCrop.width;
-    canvas.height = pixelCrop.height;
-   // canvas.width = 600;
-    //canvas.height = 848;
+    //canvas.width = pixelCrop.width;
+    //canvas.height = pixelCrop.height;
+    canvas.width = 600;
+    canvas.height = 848;
     const ctx = canvas.getContext("2d");
 
     ctx.drawImage(
@@ -29,8 +29,8 @@ export const getCroppedImage = async (src, pixelCrop) => {
       pixelCrop.height * scaleY,
       0,
       0,
-      pixelCrop.width,
-      pixelCrop.height
+      canvas.width,
+      canvas.height
     );
 
     const base64Image = canvas.toDataURL("image/jpeg", 1);

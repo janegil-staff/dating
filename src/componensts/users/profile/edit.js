@@ -1,6 +1,8 @@
 import { getCroppedImage } from "@/helpers/crop-image-helper";
 import { useCallback, useRef, useState } from "react";
 import Cropper from "react-easy-crop";
+import Header from "./header";
+import ProfileImages from "./image";
 import CropImage from "./image/crop-image";
 import classes from "./image/crop-image.module.css";
 const EditProfile = props => {
@@ -20,10 +22,11 @@ const EditProfile = props => {
   };
 
   return (
-    <>
-      <input type="file" onChange={handleFileChange} />
+    <>    
+      <Header />
       {error && <p className="error-text">{error}</p>}
       <CropImage user={user} src={src} setSrc={setSrc} />
+      <ProfileImages user={user} />
     </>
   );
 };

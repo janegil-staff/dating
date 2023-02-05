@@ -55,7 +55,6 @@ const handler = async (req, res) => {
       .json({ message: "Something went wrong with the file upload" });
   }
 
-
   res.status(201).json({ message: location });
 };
 

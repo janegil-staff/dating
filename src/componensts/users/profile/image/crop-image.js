@@ -3,6 +3,7 @@ import { fetchUploadImage, updateUserImages } from "@/helpers/fetch-helper";
 import { useCallback, useState } from "react";
 import Cropper from "react-easy-crop";
 import classes from "./crop-image.module.css";
+import Resizer from "react-image-file-resizer";
 const CropImage = (props) => {
   const { user, src, setSrc } = props;
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -19,7 +20,7 @@ const CropImage = (props) => {
   };
 
   const cropImageHandler = async () => {
-    const base64Image = await getCroppedImage(src, pixelCrop);
+    const base64Image = await getCroppedImage(src, pixelCrop);     
     const imageUrl = await fetchUploadImage(user, base64Image);
     await updateUserImages(user, imageUrl, 'PUSH');
     cancelCrop();

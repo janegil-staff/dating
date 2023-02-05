@@ -1,0 +1,45 @@
+.header-content {
+  color: rgb(138, 138, 138);
+}
+.header-title {
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  border-right: 1px solid rgb(138, 138, 138);
+  border-left: 1px solid rgb(138, 138, 138);
+  margin-bottom: 0;
+}
+.header-nav {
+  display: inline-block;
+  width: 100%;
+}
+
+.btn-edit,
+.btn-show {
+  width: 50%;
+  background-color: transparent;
+  color: rgb(138, 138, 138);
+  border: 1px solid rgb(138, 138, 138);
+  padding: 10px;
+  font-weight: bold;
+}
+.btn-edit {
+  float: left;
+}
+.btn-show {
+  float: right;
+}
+
+.btn-finish {
+  position: fixed;
+  top: 0;
+  right: 0;
+  color: rgb(203, 8, 8);
+  text-decoration: none;
+  padding: 15px;
+  font-weight: bold;
+}
+
+.btn-finish:hover {
+  color: rgb(203, 8, 8);
+}

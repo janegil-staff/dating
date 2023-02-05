@@ -1,0 +1,74 @@
+
+.list-images {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  padding-bottom: 50px;
+}
+
+.image-item {
+  flex: 33%;
+  max-width: 28%;
+  margin: 7px;
+  position: relative;
+}
+
+.image-item img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+  border-radius: 10px;
+}
+.image-item i {
+  color: rgb(138, 138, 138);
+  cursor: pointer; 
+}
+
+.empty-image-item i, .image-item i {
+  position: absolute;
+  font-size: 25px;
+  bottom: -17.5px;
+  right: -12px;
+}
+
+.empty-image-item {
+  flex: 33%;
+  max-width: 28%;
+  margin: 7px;
+  border: 3px dotted rgb(138, 138, 138);
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.empty-image-item i {
+  color: rgb(203, 8, 8);
+}
+.empty-image-item input[type="file"] {
+  display: none;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  
+}
