@@ -2,7 +2,7 @@ import { getCroppedImage } from "@/helpers/crop-image-helper";
 import { useCallback, useRef, useState } from "react";
 import Cropper from "react-easy-crop";
 import classes from "./crop-image.module.css";
-const CropImage = props => {
+const CropImage = (props) => {
   const { user, src, setSrc } = props;
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -19,22 +19,21 @@ const CropImage = props => {
 
   const cropImageHandler = async () => {
     const base64Image = await getCroppedImage(src, pixelCrop);
-  
 
     const response = await fetch("/api/profile/image-upload", {
-        method: "POST",
-        body: JSON.stringify({ user, base64Image }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    
-      const data = await response.json();
-      console.log(data);
+      method: "POST",
+      body: JSON.stringify({ user, base64Image }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+    console.log(data.message);
   };
 
   return (
-    <>  
+    <>
       {src && (
         <div className={classes["cropper-container"]}>
           <div className={classes["button-container"]}>
