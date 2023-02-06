@@ -13,7 +13,6 @@ const EditProfile = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleFileChange = (event) => {
-  
     const image = event.target.files[0];
     if (image) {
       if (!image.name.match(/\.(jpg|jpeg|png|gif|webp)$/)) {
@@ -35,15 +34,16 @@ const EditProfile = (props) => {
       />
       {error && <p className="error-text">{error}</p>}
 
+      <ProfileImages style={{ "z-index": 0 }} user={user} />
+
       <CropImage
+        style={{ "z-index": 1 }}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         user={user}
         src={src}
         setSrc={setSrc}
       />
-
-      <ProfileImages user={user} />
       <label className={classes["custom-file-upload"]}>
         <input type="file" onChange={handleFileChange} />
         Legg til bilde

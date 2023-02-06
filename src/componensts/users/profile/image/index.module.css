@@ -4,8 +4,11 @@
   flex-wrap: wrap;
   padding: 0;
   padding-bottom: 50px;
+  position: relative;
 }
+.edit-image-conatiner {
 
+}
 .image-item {
   flex: 33%;
   max-width: 28%;
