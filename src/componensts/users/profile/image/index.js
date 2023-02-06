@@ -1,30 +1,38 @@
 import classes from "./index.module.css";
-const ProfileImages = props => {
-    const { user } = props;
-const images = user.profile.images;
+import { XCircleFill } from "react-bootstrap-icons";
+import { deleteUserImage } from "@/helpers/fetch-helper";
+import { useState } from "react";
 
-const deleteHandler = (image) => {
-    
-  };
-  return <>
-          {images && (
+
+const ProfileImages = (props) => {
+  const { user } = props;
+  const [images, setImages] = useState(user.profile.images);
+
+  const deleteHandler = (image) => {
+    let updatedImages = images.filter((img) => img.url !== image.url);
+    setImages(updatedImages);
+    deleteUserImage(user, image.url); 
+  }
+ 
+  return (
+    <>
+      {images && (
         <div className={classes.editImageContainer}>
-          <h1>Rediger profil</h1>
           <div className={classes["list-images"]}>
             {images.map((image) => (
               <div className={classes["image-item"]} key={image.url}>
                 <img src={image.url} alt="image" />
-                <i
+                <XCircleFill
+                  className={classes["delete-icon"]}
                   onClick={deleteHandler.bind(this, image)}
-                  className="bi bi-x-circle-fill"
-                ></i>
+                />
               </div>
             ))}
-           
           </div>
         </div>
       )}
-  </>;
+    </>
+  );
 };
 
 export default ProfileImages;

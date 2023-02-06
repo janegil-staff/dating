@@ -22,3 +22,15 @@ export const updateUserImages = async (user, imageUrl, type) => {
     });
   }
 };
+
+export const deleteUserImage = async (user, imageUrl, type="PULL") => {
+    const response = await fetch("/api/profile/delete-image", {
+      method: "PUT",
+      body: JSON.stringify({ user, imageUrl }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  
+    console.log(response);
+  };

@@ -11,7 +11,8 @@ const handler = async (req, res) => {
   let client = await connectToDatabase();
   let db = client.db();
 
-  const data = await db
+  if(type === 'PUSH') {
+    await db
     .collection("users")
     .updateOne(
       { _id: objectId },
@@ -23,9 +24,14 @@ const handler = async (req, res) => {
         },
       }
     );
-
+  } else if(type === 'PULL') {
+    const client = await connectToDatabase();
+    const db = client.db();
+    await db.collection('users').updateOne( { _id: objectId },  { $pull: { 'profile.images': { url: imageUrl } } } );
+  }
+  
   client.close();
-  res.status(201).json({ message: data });
+  res.status(201).json({ message: 'Image is updated' });
 };
 
 export default handler;
