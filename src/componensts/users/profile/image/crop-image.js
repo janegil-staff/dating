@@ -3,7 +3,7 @@ import { fetchUploadImage, updateUser, updateUserImages } from "@/helpers/fetch-
 import { useCallback, useState } from "react";
 import Cropper from "react-easy-crop";
 import classes from "./crop-image.module.css";
-import Resizer from "react-image-file-resizer";
+
 const CropImage = (props) => {
   const { user, src, setSrc } = props;
   const [crop, setCrop] = useState({ x: 0, y: 0 });

@@ -3,13 +3,17 @@ import Header from "./header";
 import ProfileImages from "./image";
 import CropImage from "./image/crop-image";
 import classes from "./edit.module.css";
+
 const EditProfile = (props) => {
   const { user } = props;
   const [src, setSrc] = useState(null);
   const [error, setError] = useState(null);
   const [about, setAbout] = useState(user.profile.about);
   const refAbout = useRef();
+  const [isOpen, setIsOpen] = useState(false);
+
   const handleFileChange = (event) => {
+  
     const image = event.target.files[0];
     if (image) {
       if (!image.name.match(/\.(jpg|jpeg|png|gif|webp)$/)) {
@@ -31,7 +35,14 @@ const EditProfile = (props) => {
       />
       {error && <p className="error-text">{error}</p>}
 
-      <CropImage user={user} src={src} setSrc={setSrc} />
+      <CropImage
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        user={user}
+        src={src}
+        setSrc={setSrc}
+      />
+
       <ProfileImages user={user} />
       <label className={classes["custom-file-upload"]}>
         <input type="file" onChange={handleFileChange} />
