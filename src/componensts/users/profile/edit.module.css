@@ -2,6 +2,10 @@
   padding-bottom: 60px;
 }
 
+.edit-about {
+    padding: 15px;
+}
+
 .about-text {
   width: 100%;
   background-color: rgb(138, 138, 138);
@@ -9,8 +13,11 @@
   white-space: pre-line;
   border-radius: 0;
   border: none;
+  padding: 15px;
 }
-
+.about-text:focus {
+    background-color: #fff;
+}
 .custom-file-upload {
   font-family: "gotham-rounded-bold";
   border: 1px solid #ccc;

@@ -1,6 +1,6 @@
 import classes from "./index.module.css";
 import { XCircleFill } from "react-bootstrap-icons";
-import { deleteUserImage, updateUser, updateUserImages } from "@/helpers/fetch-helper";
+import { updateUser } from "@/helpers/fetch-helper";
 import { useState } from "react";
 
 
@@ -21,7 +21,7 @@ const ProfileImages = (props) => {
   return (
     <>
       {images && (
-        <div className={classes.editImageContainer}>
+        <div className={classes['edit-image-conatiner']}>
           <div className={classes["list-images"]}>
             {images.map((image) => (
               <div className={classes["image-item"]} key={image.url}>

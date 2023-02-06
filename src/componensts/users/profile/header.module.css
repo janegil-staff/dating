@@ -41,6 +41,8 @@
   font-weight: bold;
   cursor: pointer;
   font-family: "gotham-rounded-bold";
+  background-color: transparent;
+  border: 0;
 }
 
 .btn-finish:hover {

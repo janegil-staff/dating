@@ -17,9 +17,9 @@ const Header = props => {
     <>
       <header className={classes["header-content"]}>
         <h2 className={classes["header-title"]}>Rediger informasjon</h2>
-        <button className={classes["btn-finish"]} onClick={editProfileHandler}>
+        <Link href="/profile" className={classes["btn-finish"]} onClick={editProfileHandler}>
           Ferdig
-        </button>
+        </Link>
 
         <div className={classes["header-nav"]}>
           <button className={classes["btn-edit"]}>Rediger</button>

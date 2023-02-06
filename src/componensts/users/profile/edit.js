@@ -37,11 +37,12 @@ const EditProfile = (props) => {
         <input type="file" onChange={handleFileChange} />
         Legg til bilde
       </label>
-
-      <h2>Om {user.profile.name}</h2>
-      <textarea ref={refAbout} className={classes["about-text"]}>
-        {about}
-      </textarea>
+      <div className={classes["edit-about"]}>
+        <h2>Om {user.profile.name}</h2>
+        <textarea ref={refAbout} className={classes["about-text"]}>
+          {about}
+        </textarea>
+      </div>
     </section>
   );
 };
