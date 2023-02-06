@@ -11,26 +11,13 @@ export const fetchUploadImage = async (user, base64Image) => {
   return data.message;
 };
 
-export const updateUserImages = async (user, imageUrl, type) => {
-  if (type === "PUSH") {
-    const response = await fetch("/api/profile/update-user-images", {
+export const updateUser = async (user, options) => {
+    const response = await fetch("/api/profile/update", {
       method: "PUT",
-      body: JSON.stringify({ user, imageUrl, type }),
+      body: JSON.stringify({ user, options }),
       headers: {
         "Content-Type": "application/json",
       },
     });
-  }
-};
-
-export const deleteUserImage = async (user, imageUrl, type="PULL") => {
-    const response = await fetch("/api/profile/delete-image", {
-      method: "PUT",
-      body: JSON.stringify({ user, imageUrl }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  
     console.log(response);
   };

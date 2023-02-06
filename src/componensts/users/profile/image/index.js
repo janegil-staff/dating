@@ -1,6 +1,6 @@
 import classes from "./index.module.css";
 import { XCircleFill } from "react-bootstrap-icons";
-import { deleteUserImage } from "@/helpers/fetch-helper";
+import { deleteUserImage, updateUser, updateUserImages } from "@/helpers/fetch-helper";
 import { useState } from "react";
 
 
@@ -10,8 +10,12 @@ const ProfileImages = (props) => {
 
   const deleteHandler = (image) => {
     let updatedImages = images.filter((img) => img.url !== image.url);
+    
     setImages(updatedImages);
-    deleteUserImage(user, image.url); 
+    const options = {
+        images: updatedImages
+    }
+    updateUser(user, options); 
   }
  
   return (

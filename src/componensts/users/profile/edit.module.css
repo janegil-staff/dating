@@ -1,0 +1,13 @@
+
+.edit-profile {
+    padding-bottom:  60px;
+}
+
+.about-text {
+    width: 100%;
+    background-color: rgb(138, 138, 138);
+    height: 100px;
+    white-space: pre-line;
+    border-radius: 0;
+    border: none;
+}

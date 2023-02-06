@@ -1,14 +1,14 @@
-import { getCroppedImage } from "@/helpers/crop-image-helper";
-import { useCallback, useRef, useState } from "react";
-import Cropper from "react-easy-crop";
+import { useRef, useState } from "react";
 import Header from "./header";
 import ProfileImages from "./image";
 import CropImage from "./image/crop-image";
-import classes from "./image/crop-image.module.css";
-const EditProfile = props => {
-    const { user } = props;
+import classes from "./edit.module.css";
+const EditProfile = (props) => {
+  const { user } = props;
   const [src, setSrc] = useState(null);
   const [error, setError] = useState(null);
+  const [about, setAbout] = useState(user.profile.about);
+  const refAbout = useRef();
   const handleFileChange = (event) => {
     const image = event.target.files[0];
     if (image) {
@@ -22,12 +22,17 @@ const EditProfile = props => {
   };
 
   return (
-    <>    
-      <Header />
+    <section className={classes["edit-profile"]}>
+      <Header user={user} about={about} setAbout={setAbout} refAbout={refAbout} />
       {error && <p className="error-text">{error}</p>}
+      <input type="file" onChange={handleFileChange} />
       <CropImage user={user} src={src} setSrc={setSrc} />
       <ProfileImages user={user} />
-    </>
+      <h2>Om {user.profile.name}</h2>
+      <textarea ref={refAbout} className={classes["about-text"]}>
+        {about}
+      </textarea>
+    </section>
   );
 };
 

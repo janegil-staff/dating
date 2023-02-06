@@ -1,5 +1,5 @@
 import { getCroppedImage } from "@/helpers/crop-image-helper";
-import { fetchUploadImage, updateUserImages } from "@/helpers/fetch-helper";
+import { fetchUploadImage, updateUser, updateUserImages } from "@/helpers/fetch-helper";
 import { useCallback, useState } from "react";
 import Cropper from "react-easy-crop";
 import classes from "./crop-image.module.css";
@@ -22,7 +22,11 @@ const CropImage = (props) => {
   const cropImageHandler = async () => {
     const base64Image = await getCroppedImage(src, pixelCrop);     
     const imageUrl = await fetchUploadImage(user, base64Image);
-    await updateUserImages(user, imageUrl, 'PUSH');
+    user.profile.images.push({url: imageUrl});
+    const options = {
+        images: user.profile.images
+    }
+    await updateUser(user, options);
     cancelCrop();
   };
 
