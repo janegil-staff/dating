@@ -23,11 +23,21 @@ const EditProfile = (props) => {
 
   return (
     <section className={classes["edit-profile"]}>
-      <Header user={user} about={about} setAbout={setAbout} refAbout={refAbout} />
+      <Header
+        user={user}
+        about={about}
+        setAbout={setAbout}
+        refAbout={refAbout}
+      />
       {error && <p className="error-text">{error}</p>}
-      <input type="file" onChange={handleFileChange} />
+
       <CropImage user={user} src={src} setSrc={setSrc} />
       <ProfileImages user={user} />
+      <label className={classes["custom-file-upload"]}>
+        <input type="file" onChange={handleFileChange} />
+        Legg til bilde
+      </label>
+
       <h2>Om {user.profile.name}</h2>
       <textarea ref={refAbout} className={classes["about-text"]}>
         {about}

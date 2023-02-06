@@ -1,13 +1,37 @@
-
 .edit-profile {
-    padding-bottom:  60px;
+  padding-bottom: 60px;
 }
 
 .about-text {
-    width: 100%;
-    background-color: rgb(138, 138, 138);
-    height: 100px;
-    white-space: pre-line;
-    border-radius: 0;
-    border: none;
+  width: 100%;
+  background-color: rgb(138, 138, 138);
+  height: 100px;
+  white-space: pre-line;
+  border-radius: 0;
+  border: none;
+}
+
+.custom-file-upload {
+  font-family: "gotham-rounded-bold";
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background: rgb(147, 53, 53);
+  background: linear-gradient(
+    90deg,
+    rgba(147, 53, 53, 1) 0%,
+    rgba(210, 48, 66, 1) 44%,
+    rgba(255, 82, 82, 1) 100%
+  );
+  width: 75%;
+  display: block;
+  margin: 15px auto;
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+  border: none;
+}
+.custom-file-upload input[type="file"] {
+  display: none;
 }
