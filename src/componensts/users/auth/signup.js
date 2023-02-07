@@ -4,12 +4,13 @@ import DatePicker from "react-datepicker";
 import { useRouter } from "next/router";
 import useInput from "@/hooks/use-input";
 import { createUser, signInUser } from "@/helpers/user-helper";
+import moment from "moment";
 const SignUp = (props) => {
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(moment().subtract(18, "years")._d);
   const { setIsOpen } = props;
   const [error, setError] = useState(null);
   const router = useRouter();
-  const [sex, setSex] = useState('male');
+  const [sex, setSex] = useState("male");
   const {
     value: enteredName,
     isValid: enteredNamesValid,
@@ -61,41 +62,42 @@ const SignUp = (props) => {
   const passwordConfirmationInputClasses = passwordConfirmationInputHasError
     ? "form-control invalid"
     : "form-control";
-  
-    const submitHandler = async (event) => {
-      event.preventDefault();
-      setError(null);
-      try {
-        await createUser({
-          name: enteredName,
-          email: enteredEmail, 
-          password: enteredPassword, 
-          sex,
-          birthdate: startDate,
-          setError});
-  
-          if(error) return;
-          // Signing in new user
-  
-          let options = {
-            redirect: false,
-            email: enteredEmail,
-            password: enteredPassword
-          }
-          await signInUser({
-            type: 'credentials',
-            options,
-            setError
-          });
-          router.replace('/profile');
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-    const onSexChange = event => {
-      setSex(event.target.value);
-      console.log(sex);
+
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    setError(null);
+    try {
+      await createUser({
+        name: enteredName,
+        email: enteredEmail,
+        password: enteredPassword,
+        sex,
+        birthdate: startDate,
+        setError,
+      });
+
+      if (error) return;
+      // Signing in new user
+
+      let options = {
+        redirect: false,
+        email: enteredEmail,
+        password: enteredPassword,
+      };
+      await signInUser({
+        type: "credentials",
+        options,
+        setError,
+      });
+      router.replace("/profile");
+    } catch (error) {
+      setError(error.message);
     }
+  };
+  const onSexChange = (event) => {
+    setSex(event.target.value);
+    console.log(sex);
+  };
   return (
     <>
       <div className={classes.contain}>
@@ -155,6 +157,12 @@ const SignUp = (props) => {
               <p>
                 <label for="">Fødselsdato</label>
                 <DatePicker
+                  minDate={moment().subtract(150, "years")._d}
+                  maxDate={moment().subtract(18, "years")._d}
+                  scrollableYearDropdown
+                  dropdownMode="select"
+                  showMonthDropdown
+                  showYearDropdown
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
                 />

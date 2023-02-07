@@ -94,10 +94,7 @@
   }
   
   .contain button {
-    background: lightgrey;
-    width: 100%;
-    border: 0;
-    cursor: pointer;
+   display: none;
   }
   .contain button:hover, .contain button:focus {
     background: gold;
