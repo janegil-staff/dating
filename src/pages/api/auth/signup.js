@@ -34,6 +34,7 @@ const handler = async (req, res) => {
 
   const user = await db.collection('users').insertOne({
     email: email,
+    lastActive: new Date().toString(),
     password: hashedPassword,
     profile: {
       name: name,

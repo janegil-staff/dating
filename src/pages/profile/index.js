@@ -20,15 +20,13 @@ export const getServerSideProps = async context => {
   const client = await connectToDatabase();
   const db = client.db();
 
-  const currentUser = await db.collection("users").findOne({
+  const user = await db.collection("users").findOneAndUpdate({
     email: session.user.email,
+  }, { $set: { lastActive: new Date().toString() } }).then(data => {
+    return data.value;
   });
-
-  const user = {
-    id: currentUser._id.toString(),
-    ...currentUser
-  }
-  delete user._id;
+  
+  user._id = user._id.toString();
 
   client.close();
   return {

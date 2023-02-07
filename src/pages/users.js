@@ -1,55 +1,47 @@
-
-import { getSession } from 'next-auth/react';
-import { connectToDatabase } from '@/lib/db';
-import AllUsers from '@/componensts/users';
-const Users = props => {
+import { getSession } from "next-auth/react";
+import { connectToDatabase } from "@/lib/db";
+import AllUsers from "@/componensts/users";
+const Users = (props) => {
   return <AllUsers user={props.user} users={props.users} />;
-}
+};
 
-export const getServerSideProps = async context => {
-  const session = await getSession({req: context.req});
+export const getServerSideProps = async (context) => {
+  const session = await getSession({ req: context.req });
 
-  if(!session) {
+  if (!session) {
     return {
       redirect: {
-        destination: '/',
-        permanent: false
-      }
-    }
+        destination: "/",
+        permanent: false,
+      },
+    };
   }
 
   const client = await connectToDatabase();
   const db = client.db();
 
-  const currentUser = await db.collection("users").findOne({
+  const user = await db.collection("users").findOneAndUpdate({
     email: session.user.email,
+  }, { $set: { lastActive: new Date().toString() } }).then(data => {
+    return data.value;
   });
+  
+  user._id = user._id.toString();
+  
+  const AllUsersOfOppositeGender = await db
+    .collection("users")
+    .find({ "profile.sex": user.profile.sex === "male" ? "female" : "male" });
 
-  const user = {
-    id: currentUser._id.toString(),
-    ...currentUser
-  }
-  delete user._id;
+  const users = await AllUsersOfOppositeGender.toArray();
 
-
-  const AllUsersOfOppositeGender = await db.collection('users').find({'profile.sex': user.profile.sex === 'male' ? 'female' : 'male'});
-
-  const usersArray = await AllUsersOfOppositeGender.toArray();
-
-  const users = [];
-  for(let i = 0; i < usersArray.length; i++) {
-    const u = {
-        id: usersArray[i]._id.toString(),
-        ...usersArray[i]
-      }
-      delete u._id;
-      users.push(u);
-  }
+  users.forEach(u => {
+    u._id = u._id.toString();
+  });
 
   client.close();
   return {
-    props: { session, user, users }
-  }
-}
+    props: { session, user, users },
+  };
+};
 
 export default Users;

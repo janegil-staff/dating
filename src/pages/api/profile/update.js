@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 const handler = async (req, res) => {
   if (req.method !== "PUT") return;
   const { user, options } = req.body;
-  const objectId = new ObjectId(user.id);
+  const objectId = new ObjectId(user._id);
 
   let client = await connectToDatabase();
   let db = client.db();
