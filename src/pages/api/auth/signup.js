@@ -39,7 +39,7 @@ const handler = async (req, res) => {
       name: name,
       about: '',
       sex: sex,
-      birthDate: birthdate,
+      birthdate: birthdate,
       images: [],
       liked: [],
       likedMe:[]

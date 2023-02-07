@@ -8,7 +8,7 @@ const UserProfile = (props) => {
   const profileImage = user.profile.images.find(
     (image) => image.isProfilePicture
   );
-
+console.log(user.profile);
   const age = calculateAge(user.profile.birthdate);
 
   return (
