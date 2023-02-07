@@ -64,7 +64,7 @@ const SignUp = (props) => {
   
     const submitHandler = async (event) => {
       event.preventDefault();
-  
+      setError(null);
       try {
         await createUser({
           name: enteredName,
@@ -74,6 +74,7 @@ const SignUp = (props) => {
           birthdate: startDate,
           setError});
   
+          if(error) return;
           // Signing in new user
   
           let options = {

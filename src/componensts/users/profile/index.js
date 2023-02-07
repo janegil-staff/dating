@@ -50,7 +50,7 @@ console.log(user.profile);
       </div>
 
       <div className={classes['profile-introduction']}>
-      <pre>{user.profile.about}</pre>
+      <pre style={{'white-space': 'pre-wrap'}}>{user.profile.about}</pre>
       </div> 
     </section>
   );
