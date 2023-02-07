@@ -24,7 +24,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link href="/">
+          <Link href="/users">
             <HeartFill />
           </Link>
         </li>

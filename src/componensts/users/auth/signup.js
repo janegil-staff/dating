@@ -5,12 +5,14 @@ import { useRouter } from "next/router";
 import useInput from "@/hooks/use-input";
 import { createUser, signInUser } from "@/helpers/user-helper";
 import moment from "moment";
+import { sendStatusCode } from "next/dist/server/api-utils";
 const SignUp = (props) => {
   const [startDate, setStartDate] = useState(moment().subtract(18, "years")._d);
   const { setIsOpen } = props;
   const [error, setError] = useState(null);
   const router = useRouter();
-  const [sex, setSex] = useState("male");
+  const [sex, setSex] = useState('male');
+  
   const {
     value: enteredName,
     isValid: enteredNamesValid,
@@ -178,6 +180,7 @@ const SignUp = (props) => {
                       id="radio-1"
                       value="male"
                       onChange={onSexChange}
+                      checked 
                     />
                   </li>
                   <li>
