@@ -15,3 +15,16 @@ export const isValidDate = (date) => {
 
   return age > 17 && age < 100;
 };
+
+const diffMinutes = (dt2, dt1) => {
+  var diff = (dt2.getTime() - dt1.getTime()) / 1000;
+  diff /= 60;
+  return Math.abs(Math.round(diff));
+};
+
+export const isActive = (date) => {
+  console.log(date);
+  let dateNow = new Date();
+console.log('Diff minutes_:_' + diffMinutes(date, dateNow));
+  return diffMinutes(date, dateNow) < 15;
+};

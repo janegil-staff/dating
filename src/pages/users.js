@@ -25,7 +25,7 @@ export const getServerSideProps = async (context) => {
   }, { $set: { lastActive: new Date().toString() } }).then(data => {
     return data.value;
   });
-  
+
   user._id = user._id.toString();
   
   const AllUsersOfOppositeGender = await db

@@ -94,15 +94,12 @@
   }
   
   .contain button {
-   display: none;
+   cursor: pointer;
   }
   .contain button:hover, .contain button:focus {
     background: gold;
     outline: 0;
   }
-
-
-
 
   .contain input[type="radio"] {
     margin-top: -1px;

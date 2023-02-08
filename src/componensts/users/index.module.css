@@ -1,21 +1,77 @@
 .users-list {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0;
-    padding-bottom: 50px;
-    position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  padding-bottom: 50px;
+  position: relative;
+  color: #fff;
+  list-style-type: none;
 }
 
 .user-item {
-    flex: 33%;
-    max-width: 28%;
-    margin: 7px;
-    position: relative;
+  flex: 24%;
+  max-width: 28%;
+  margin: 7px;
+  position: relative;
+  cursor: pointer;
+  border: 1px solid  rgb(224, 224, 224);
+  border-radius: 10px;
+}
+
+.user-item img {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  vertical-align: middle;
+  width: 100%;
+  border-bottom:1px solid rgb(224, 224, 224);
+}
+
+.user-item-info {
+  margin-top: -60px;
+  height: 20px;
+  padding-left: 5px;
+  padding-bottom: 20px;
+  width: 100%;
+  font-family: "gotham-rounded-bold";
+  line-height: 0;
+}
+
+.user-item-age {
+  font-family: "gotham-rounded-light";
+}
+
+.user-item-about {
+    padding: 10px;
+}
+
+.active {
+  color: rgb(9, 157, 9);
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .user-item {
+    max-width: 22%;
   }
-  
-  .user-item img {
-    margin-top: 8px;
-    vertical-align: middle;
-    width: 100%;
-    border-radius: 10px;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .user-item {
+    max-width: 18%;
   }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .user-item {
+    max-width: 13%;
+  }
+}
