@@ -12,9 +12,10 @@ const AllUsers = (props) => {
   return (
     <>
       <h1>Bergen Dating</h1>
-      <ul className={classes["users-list"]}>
+      <ul className={classes["users-nav"]}>
         {users.map((u) => (
-          <li key={u._id} className={classes["user-item"]}>
+          <li key={u._id} className={classes["users-nav__item"]}>
+           <a href={`/profile/${u._id}`}>
             <img
               src={
                 u.profile.images.length > 0
@@ -24,22 +25,23 @@ const AllUsers = (props) => {
               alt="Avatar"
             />
 
-            <div className={classes["user-item-info"]}>
+            <div className={classes["users-nav__info"]}>
               <p>
                 {activeStatus}{" "}
                 {u.profile.name.length > 10
                   ? u.profile.name.substring(0, 8) + ".."
                   : u.profile.name}
               </p>
-              <p className={classes["user-item-age"]}>
+              <p className={classes["users-nav__age"]}>
                 {calculateAge(u.profile.birthdate)}
               </p>
             </div>
-            <div className={classes["user-item-about"]}>
+            <div className={classes["users-nav__about"]}>
               {u.profile.about.length > 50
                 ? u.profile.about.substring(0, 25) + ".."
                 : u.profile.about}
             </div>
+            </a>
           </li>
         ))}
       </ul>
