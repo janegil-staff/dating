@@ -7,6 +7,7 @@ const signToken = (id) => {
   });
 };
 export const signup = async (req, res) => {
+
   const { name, email, password, age, gender, genderPreference } = req.body;
 
   try {
@@ -39,7 +40,7 @@ export const signup = async (req, res) => {
       gender,
       genderPreference,
     });
-
+  
     const token = signToken(newUser._id);
 
     res.cookie("jwt", token, {

@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { useAuthStore } from "../store/useAuthStore";
 
-const SignupForm = () => {
+const SignUpForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -8,13 +9,14 @@ const SignupForm = () => {
   const [age, setAge] = useState("");
   const [genderPreference, setGenderPreference] = useState("");
 
-  const loading = false;
+  const { signup, loading } = useAuthStore();
+
   return (
     <form
       className="space-y-6"
       onSubmit={(e) => {
         e.preventDefault();
-        console.log("TODO");
+        signup({ name, email, password, gender, age, genderPreference });
       }}
     >
       {/* NAME */}
@@ -113,28 +115,28 @@ const SignupForm = () => {
         <div className="mt-2 flex gap-2">
           <div className="flex items-center">
             <input
-              id="male"
+              id="Male"
               name="gender"
               type="checkbox"
-              checked={gender === "male"}
-              onChange={() => setGender("male")}
+              checked={gender === "Male"}
+              onChange={() => setGender("Male")}
               className="h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
             />
-            <label htmlFor="male" className="ml-2 block text-sm text-gray-900">
+            <label htmlFor="Male" className="ml-2 block text-sm text-gray-900">
               Male
             </label>
           </div>
           <div className="flex items-center">
             <input
-              id="female"
+              id="Female"
               name="gender"
               type="checkbox"
-              checked={gender === "female"}
-              onChange={() => setGender("female")}
+              checked={gender === "Female"}
+              onChange={() => setGender("Female")}
               className="h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
             />
             <label
-              htmlFor="female"
+              htmlFor="Female"
               className="ml-2 block text-sm text-gray-900"
             >
               Female
@@ -171,8 +173,8 @@ const SignupForm = () => {
               id="prefer-female"
               name="gender-preference"
               type="radio"
-              value="female"
-              checked={genderPreference === "female"}
+              value="Female"
+              checked={genderPreference === "Female"}
               onChange={(e) => setGenderPreference(e.target.value)}
               className="h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300"
             />
@@ -219,5 +221,4 @@ const SignupForm = () => {
     </form>
   );
 };
-
-export default SignupForm;
+export default SignUpForm;

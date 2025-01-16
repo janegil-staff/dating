@@ -3,6 +3,8 @@ import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
 import ProfilePage from "./pages/ProfilePage";
 import ChatPage from "./pages/ChatPage";
+import { Toaster } from "react-hot-toast";
+
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/chat/:id" element={<ChatPage />} />
       </Routes>
+      <Toaster />
     </div>
   );
 }
