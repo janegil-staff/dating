@@ -12,9 +12,11 @@ export const updateProfile = async (req, res) => {
     if (image) {
       // base64 format
       if (image.startsWith("data:image")) {
+    
         try {
           const uploadResponse = await cloudinary.uploader.upload(image);
           updatedData.image = uploadResponse.secure_url;
+          console.log(updatedData);
         } catch (error) {
           console.error("Error uploading image:", uploadError);
 
