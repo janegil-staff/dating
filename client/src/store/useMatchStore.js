@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
+import { getSocket } from "../socket/socket.client";
 
 export const useMatchStore = create((set) => ({
   matches: [],
@@ -61,7 +62,14 @@ export const useMatchStore = create((set) => ({
 
   subscribeToNewMatches: () => {
     try {
-      // TODO
+      const socket = getSocket();
+
+      socket.on("newMatch", (newMatch) => {
+        set((state) => ({
+          matches: [...state.matches, newMatch],
+        }));
+        toast.success("You got a new match!");
+      });
     } catch (error) {
       console.log(error);
     }
@@ -69,7 +77,8 @@ export const useMatchStore = create((set) => ({
 
   unsubscribeFromNewMatches: () => {
     try {
-      // TODO socket;
+      const socket = getSocket();
+      socket.off("newMatch");
     } catch (error) {
       console.error(error);
     }

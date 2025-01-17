@@ -9,11 +9,12 @@ export const useUserStore = create((set) => ({
   updateProfile: async (data) => {
     try {
       set({ loading: true });
+      console.log(data);
       const res = await axiosInstance.put("/users/update", data);
       useAuthStore.getState().setAuthUser(res.data.user);
       toast.success("Profile updated successfully");
     } catch (error) {
-      toast.error(error.response.data.message || "Something went wrong");
+      toast.error(error?.response?.data?.message || "Something went wrong");
     } finally {
       set({ loading: false });
     }
