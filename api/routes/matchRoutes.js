@@ -13,5 +13,5 @@ router.post("/swipe-right/:likedUserId", protectRoute, swipeRight);
 router.post("/swipe-left/:dislikeUserId", protectRoute, swipeLeft);
 
 router.get("/", protectRoute, getMatches);
-router.get("user-profils", protectRoute, getUserProfiles);
+router.get("/user-profiles", protectRoute, getUserProfiles);
 export default router;
