@@ -1,7 +1,7 @@
 import io from "socket.io-client";
 
 const SOCKET_URL =
-  import.meta.env.MODE === "development" ? "http://localhost:5010" : "/";
+  import.meta.env.NODE === "development" ? "http://localhost:5010" : "/";
 
 let socket = null;
 
