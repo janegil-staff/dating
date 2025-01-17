@@ -73,7 +73,7 @@ export const login = async (req, res) => {
 
     const user = await User.findOne({ email }).select("+password");
 
-    if (!user || !(await user.matschPassword(password))) {
+    if (!user || !(await user.matchPasssword(password))) {
       return res.status(401).json({
         success: false,
         message: "Invalid email or password",

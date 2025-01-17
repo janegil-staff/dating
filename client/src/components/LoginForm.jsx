@@ -1,16 +1,18 @@
 import { useState } from "react";
+import { useAuthStore } from "../store/useAuthStore";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const loading = false;
+  const { login, loading } = useAuthStore();
+
   return (
     <form
       className="space-y-6"
       onSubmit={(e) => {
         e.preventDefault();
-        console.log("TODO");
+        login({ email, password });
       }}
     >
       <div>
@@ -58,11 +60,11 @@ const LoginForm = () => {
       <button
         type="submit"
         className={`w-full flex justify-center py-2 px-4 border border-transparent 
-            rounded-md shadow-sm text-sm font-medium text-white ${
-              loading
-                ? "bg-pink-400 cursor-not-allowed"
-                : "bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
-            }`}
+					rounded-md shadow-sm text-sm font-medium text-white ${
+            loading
+              ? "bg-pink-400 cursor-not-allowed"
+              : "bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+          }`}
         disabled={loading}
       >
         {loading ? "Signing in..." : "Sign in"}
@@ -70,5 +72,4 @@ const LoginForm = () => {
     </form>
   );
 };
-
 export default LoginForm;

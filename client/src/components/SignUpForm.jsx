@@ -156,8 +156,8 @@ const SignUpForm = () => {
               id="prefer-male"
               name="gender-preference"
               type="radio"
-              value="male"
-              checked={genderPreference === "male"}
+              value="Male"
+              checked={genderPreference === "Male"}
               onChange={(e) => setGenderPreference(e.target.value)}
               className="h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300"
             />

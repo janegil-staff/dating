@@ -60,7 +60,7 @@ export const swipeLeft = async (req, res) => {
 };
 export const getMatches = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).poppulate(
+    const user = await User.findById(req.user.id).populate(
       "matches",
       "name image"
     );
