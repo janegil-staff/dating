@@ -58,6 +58,7 @@ export const swipeLeft = async (req, res) => {
     });
   }
 };
+
 export const getMatches = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).populate(
@@ -70,35 +71,45 @@ export const getMatches = async (req, res) => {
       matches: user.matches,
     });
   } catch (error) {
-    console.log("Error in getMatches ", error);
+    console.log("Error in getMatches: ", error);
+
     res.status(500).json({
       success: false,
-      message: "Internal sevrer error",
+      message: "Internal server error",
     });
   }
 };
+
 export const getUserProfiles = async (req, res) => {
   try {
-    const currentUser = User.findById(req.user.id);
+    const currentUser = await User.findById(req.user.id);
 
     const users = await User.find({
       $and: [
         { _id: { $ne: currentUser.id } },
         { _id: { $nin: currentUser.likes } },
         { _id: { $nin: currentUser.dislikes } },
-        { _id: { $nin: currentUser.matcches } },
+        { _id: { $nin: currentUser.matches } },
         {
-          gender: currentUser.genderPreference,
+          gender:
+            currentUser.genderPreference === "Both"
+              ? { $in: ["Male", "Female"] }
+              : currentUser.genderPreference,
         },
+        { genderPreference: { $in: [currentUser.gender, "Both"] } },
       ],
     });
 
-    res.status(200).json({ success: true, users });
+    res.status(200).json({
+      success: true,
+      users,
+    });
   } catch (error) {
-    console.log("Error in getUserProfiles ", error);
+    console.log("Error in getUserProfiles: ", error);
+
     res.status(500).json({
       success: false,
-      message: "Internal sevrer error",
+      message: "Internal server error",
     });
   }
 };

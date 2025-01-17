@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import { Header } from "../components/Header";
-import { useMatchStore } from "../store/useMatchStore";
+import { useMatchStore } from "../store/useMatchStore.js";
 import { Frown } from "lucide-react";
 /*
 import SwipeArea from "../components/SwipeArea";
 import SwipeFeedback from "../components/SwipeFeedback";
 */
 import { useAuthStore } from "../store/useAuthStore";
+import SwipeArea from "../components/SwipeArea";
+import SwipeFeedback from "../components/SwipeFeedback";
 
 const HomePage = () => {
   const {
@@ -43,11 +45,9 @@ const HomePage = () => {
         <Header />
         <main className="flex-grow flex flex-col gap-10 justify-center items-center p-4 relative overflow-hidden">
           {userProfiles.length > 0 && !isLoadingUserProfiles && (
-            <>{/*
-               <SwipeArea />
+            <>
+              <SwipeArea />
               <SwipeFeedback />
-              */}
-           
             </>
           )}
 
